@@ -28,7 +28,8 @@ router.post("/weather", async (req, res) => {
     );
     // https://api.openweathermap.org/data/2.5/weather?q=${Islamabad}&units=metric&appid=${apiKey}
     const data = response;
-    // console.log(data);
+
+    // console.log(arData);
 
     let currentDate = new Date();
     let weekDay = new Array();
@@ -40,8 +41,9 @@ router.post("/weather", async (req, res) => {
     weekDay[5] = "Friday";
     weekDay[6] = "Saturday";
     const today = weekDay[currentDate.getDay()];
-
+    console.log("Today:", today);
     const today_date = currentDate.getDate();
+    console.log("Today date:", today_date);
     var months = [
       "Jan",
       "Feb",
@@ -57,14 +59,15 @@ router.post("/weather", async (req, res) => {
     ];
 
     const month = months[currentDate.getMonth()];
-
-    const city_name = data.name;
-    const country_name = data.sys.country;
-    const temp = data.main.temp;
-    const icon = data.weather[0].icon;
+    console.log("Month:", month);
+    const city_name = data.data.name;
+    console.log(city_name);
+    const country_name = data.data.sys.country;
+    const temp = data.data.main.temp;
+    const icon = data.data.weather[0].icon;
 
     const weatherData = {
-      weekDay: weekDay,
+      today: today,
       today_date: today_date,
       month: month,
       city_name: city_name,
