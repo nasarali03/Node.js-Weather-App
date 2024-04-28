@@ -2,7 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import path from "path";
+import bodyParser from "body-parser";
+import cors from "cors";
 import hbs from "hbs";
+import router from "./routes/index.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -11,6 +14,14 @@ dotenv.config({
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+  })
+);
+
+app.use(bodyParser.json());
 //public static path
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDirectory = path.resolve(__dirname, "..", "public");
@@ -22,23 +33,11 @@ app.set("view engine", "hbs");
 app.set("views", template_path);
 hbs.registerPartials(partials_path);
 
-app.get("", (req, res) => {
-  res.render("index");
-});
+// app.get("", (req, res) => {
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+// });
 
-app.get("/weather", (req, res) => {
-  res.render("weather");
-});
-
-app.get("*", (req, res) => {
-  res.render("404error", {
-    errorMSg: "Opps! Page Not Found",
-  });
-});
+app.use("", router);
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
