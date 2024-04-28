@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>headerLinks}}
+</head>
+
+<body>
+    {{>navbar}}
+
+    <!-- main header -->
+    <div class="container-fluid main_header">
+        <div class="row">
+            <div class="col-md-10 col-12 mx-auto">
+                <!-- left side div -->
+                <div class="row">
+                    <div class="col-md-12 col-12 main_header_left align-items-center">
+                        <figure class="errimg">
+                            <img src="images/404error.png" alt="404 error page not found" class="img-fluid" title="404error">
+                        </figure>
+
+                        <h3>{{errorMSg}}</h3>
+                        <a href="/" > <button>Go back </button></a>
+                    </div>
+                    <!-- right side div -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    {{>footer}}
+</body>
+
+</html>
