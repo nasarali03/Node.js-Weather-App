@@ -34,6 +34,15 @@ const getInfo = async (event) => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          day.innerText = data.today;
+          Month.innerText = data.month;
+          today_date.innerText = data.today_date;
+          city_name.innerText = `${data.city_name}, ${data.country_name}`;
+          temp.innerText = `${data.temp} `;
+
+          const icon = data.icon;
+          imageIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${icon}@2x.png" width="100px"> `;
+          dataHide.classList.remove("data_hide");
         });
     } catch (error) {
       console.log("Error:", error);
